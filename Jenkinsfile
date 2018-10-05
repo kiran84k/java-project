@@ -2,9 +2,6 @@ pipeline {
 	agent {
 		label 'slave' 
 	}
-	options {
-		buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '1'))
-	}
 
 	stages{
 		stage('Junit test'){
