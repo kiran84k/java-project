@@ -1,6 +1,10 @@
 pipeline {
-	agent {
-		label 'slave' 
+	agent any
+
+	options {
+		buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '1'))
+		timestamps()
+    	timeout(time: 5, unit: 'MINUTES')
 	}
 
 	stages{
