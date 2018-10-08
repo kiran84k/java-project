@@ -10,7 +10,7 @@ pipeline {
 	stages{
 		stage('Junit test'){
       agent{ 
-        label ' apache'
+        label 'apache'
         }
 			steps{
 				sh 'ant -f test.xml -v'
@@ -19,7 +19,7 @@ pipeline {
 		}
 		stage('build'){
 			agent{ 
-        label ' apache'
+        label 'apache'
         }
       steps{
 				sh 'ant -f build.xml -v'
@@ -27,10 +27,10 @@ pipeline {
 		}
 		stage('deploy'){
 			agent{ 
-        label ' apache'
+        label 'apache'
         }
       steps{
-				sh "cp dist/rectangle*${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all"
+				sh "cp dist/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all"
 			}
 		}
     stage('running on master'){
@@ -38,8 +38,8 @@ pipeline {
         label 'master'
       }
       steps{
-        sh 'wget http://192.168.56.120/rectangles/all/rectangle*${env.BUILD_NUMBER}.jar'
-        sh "java -jar rectangle*${env.BUILD_NUMBER}.jar 3 4"
+        sh 'wget http://192.168.56.120/rectangles/all/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar'
+        sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 3 4"
 
       }
     }
