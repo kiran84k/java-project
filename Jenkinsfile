@@ -47,7 +47,7 @@ pipeline {
 
 	post {
 		always {
-			archiveArtifacts 'dist/*.jar'
+			archiveArtifacts 'dist/rectangle_${env.BUILD_NUMBER}.jar'
 		}
 	}
 }
